@@ -1,5 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { Button } from "~/components/ui/button";
+import db from "~/db.server";
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,6 +8,13 @@ export const meta: MetaFunction = () => {
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
+
+export async function loader() {
+  const response = await db.query.users.findMany();
+  console.log({ response });
+
+  return null;
+}
 
 export default function Index() {
   return (
