@@ -1,4 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
+import { ModeToggle } from "~/components/mode-toggle";
 import { Button } from "~/components/ui/button";
 import db from "~/db.server";
 
@@ -11,7 +12,7 @@ export const meta: MetaFunction = () => {
 
 export async function loader() {
   const response = await db.query.users.findMany();
-  console.log({ response });
+  // console.log({ response });
 
   return null;
 }
@@ -24,6 +25,7 @@ export default function Index() {
         <Button variant="default" onClick={() => console.log("roosevelt")}>
           Feels right
         </Button>
+        <ModeToggle />
         <li>
           <a
             className="text-blue-700 underline visited:text-purple-900"
